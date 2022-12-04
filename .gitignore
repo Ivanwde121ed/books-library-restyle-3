@@ -6,12 +6,8 @@ __pycache__/
 books/
 images/
 site/
-
 *.json
-*.html
-
-
-
+index.html
 
 ## Django stuff:
 *.log
