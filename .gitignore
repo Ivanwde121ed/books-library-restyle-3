@@ -7,8 +7,8 @@ books/
 images/
 site/
 
-.python-version
 *.json
+*.html
 
 
 
