@@ -21,6 +21,3 @@ db.sqlite3-journal
 env/
 venv/
 .python-version
-
-
-
