@@ -1,6 +1,8 @@
 import json
-from livereload import Server
+import os
 
+from more_itertools import ichunked
+from livereload import Server
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 BOOKS_FILENAME = 'books.json'
@@ -16,20 +18,25 @@ def fetch_books_from_json(filename) -> list[dict]:
 
 def on_reload():
 
+    os.makedirs('pages', exist_ok=True)
+
     books = fetch_books_from_json(BOOKS_FILENAME)
-    env = Environment(
-        loader=FileSystemLoader('.'),
-        autoescape=select_autoescape(['html', 'xml'])
-    )
 
-    template = env.get_template('template.html')
+    for page, block_books in enumerate(ichunked(books, 20), start=1):
+        env = Environment(
+            loader=FileSystemLoader('.'),
+            autoescape=select_autoescape(['html', 'xml'])
+        )
 
-    rendered_page = template.render(
-        books=books,
-    )
+        template = env.get_template('template.html')
 
-    with open('index.html', 'w', encoding="utf8") as file:
-        file.write(rendered_page)
+        rendered_page = template.render(
+            books=block_books,
+        )
+
+        path_page = os.path.join('pages', f'index{str(page)}.html')
+        with open(path_page, 'w', encoding="utf8") as file:
+            file.write(rendered_page)
 
 
 
