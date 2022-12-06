@@ -1,6 +1,6 @@
 import json
 import os
-
+from math import ceil
 from more_itertools import ichunked
 from livereload import Server
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -32,12 +32,13 @@ def on_reload():
 
         rendered_page = template.render(
             books=block_books,
+            page=page,
+            max_pages=ceil(len(books) / 20),
         )
 
         path_page = os.path.join('pages', f'index{str(page)}.html')
         with open(path_page, 'w', encoding="utf8") as file:
             file.write(rendered_page)
-
 
 
 if __name__ == '__main__':
