@@ -28,6 +28,8 @@ python render_website.py
 Скрипт генерирует страницы сайта в каталоге `pages`.  
 Готовые страницы могут работать локально.
 
+Посмотреть пример работы сайта можно на [GitHub Pages](https://kruser66.github.io/books-library-restyle-3/pages/index1.html)
+
 ## Цели проекта
 
 Код написан в учебных целях — это урок в курсе по Python и веб-разработке на сайте [Devman](https://dvmn.org).
