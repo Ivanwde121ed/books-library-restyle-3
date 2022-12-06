@@ -19,10 +19,10 @@ def fetch_books_from_json(filename) -> list[dict]:
 def on_reload():
 
     os.makedirs('pages', exist_ok=True)
-
+    books_per_page = 10
     books = fetch_books_from_json(BOOKS_FILENAME)
 
-    for page, block_books in enumerate(ichunked(books, 20), start=1):
+    for page, block_books in enumerate(ichunked(books, books_per_page), start=1):
         env = Environment(
             loader=FileSystemLoader('.'),
             autoescape=select_autoescape(['html', 'xml'])
@@ -33,7 +33,7 @@ def on_reload():
         rendered_page = template.render(
             books=block_books,
             page=page,
-            max_pages=ceil(len(books) / 20),
+            max_pages=ceil(len(books) / books_per_page),
         )
 
         path_page = os.path.join('pages', f'index{str(page)}.html')
