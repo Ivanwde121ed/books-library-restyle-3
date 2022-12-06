@@ -3,12 +3,7 @@ __pycache__/
 .idea
 *.py[cod]
 *$py.class
-books/
-images/
-pages/
-static/
-*.json
-index.html
+
 
 ## Django stuff:
 *.log
